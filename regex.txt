@@ -1,0 +1,36 @@
+===========
+RedEx Items
+===========
+^ - beginning of a line
+$ - end of a line
+
+Word boundaries: \< words  \>
+
+Wildcards
+--------
+. - any character
+[characters] - acceptable character list
+
+Multipliers
+-----------
+* - zero to infinity or zero or more;  + - one to infinity or one or more
+{\<#>\} -- where '#' is a number, for an explicit number of characters
+( ); (?...) -- Non-capturing group
+
+Useful One-Liners
+-----------------
+Search the dictionary for words starting with "q.": grep q[^u] /usr/share/dict/words 
+-- The carrot "^" means you don't want to match anything within the [] range.
+
+Search the dictionary for words 
+grep q[^u] /usr/share/dict/words | grep ^[^A-Z] -- The carrot outside of a range [] means "match anything within this range.  The carrot inside the brackets means "don't match any capital letters from A thru Z.
+
+grep ^b...$ /usr/share/dict/words - Find words starting with "b" with any three characters (the three periods).  The dollar sign signifies where the search should stop.  This search will produce any four letter words that start with the letter "b."
+
+egrep '^b[a-z]{3}' /usr/share/dict/words -- Same as above, but will ignore punctuation (like apostrophes).
+ - The curly brackets {} indicates repetition.  "egrep" is "extended grep" and uses REGEX.
+
+grep '^[bo]*$' /usr/share/dict/words -- Find all words beginning with "bo" of any length.
+
+More EGREP:
+find /home/falcon | egrep '(mp4:mkv)' -- find all files in /home/falcon that end with mp4 or mkv.

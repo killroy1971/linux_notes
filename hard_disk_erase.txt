@@ -1,0 +1,4 @@
+Erase a hard disk
+=================
+Use the "wipe" utility:
+wipe -q /dev/"drive"

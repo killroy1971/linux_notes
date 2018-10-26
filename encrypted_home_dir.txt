@@ -1,0 +1,8 @@
+Encrypted Home Directory
+========================
+
+Retrieve directory encryption passphrase
+----------------------------------------
+ecryptfs-unwrap-passphrase
+
+Use your logon password at the passphrase prompt.

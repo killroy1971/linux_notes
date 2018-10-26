@@ -1,0 +1,7 @@
+Find a blcok device's UUID
+==========================
+ls -l /dev/disk/by-uuid
+
+-OR-
+
+blkid <device>

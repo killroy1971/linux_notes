@@ -1,0 +1,3 @@
+Once TLS is enabled, use the “-H ldaps://<ldapserver-fqdn:636” parameter in ldapsearch
+i.e. ldapserach -H ldaps://nfs.learn.net:636 -b “dc=learn,dc=net” -s sub -x “(objectclass=*)"
+

@@ -1,0 +1,9 @@
+grep q[^u] /usr/share/dict/words -- Search the dictionary for words starting with "q".  The carrot "^" means you don't want to match anything within the [] range.
+grep q[^u] /usr/share/dict/words | grep ^[^A-Z] -- The carrot outside of a range [] means "match anything within this range.  The carrot inside the brackets means "don't match any capital letters from A thru Z.
+grep ^b...$ /usr/share/dict/words - Find words starting with "b" with any three characters (the three periods).  The dollar sign signifies where the search should stop.  This search will produce any four letter words that start with the letter "b."
+egrep '^b[a-z]{3}' /usr/share/dict/words -- Same as above, but will ignore punctuation (like apostrophes).
+ - The curly brackets {} indicates repetition.  "egrep" is "extended grep" and uses REGEX.
+grep '^[bo]*$' /usr/share/dict/words -- Find all words beginning with "bo" of any length.
+
+More EGREP:
+find /home/falcon | egrep '(mp4:mkv)' -- find all files in /home/falcon that end with mp4 or mkv.

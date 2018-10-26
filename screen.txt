@@ -1,0 +1,12 @@
+==============
+Screen Utility
+==============
+
+Launch Screen: screen
+Show screen parameters: <CTRL>+<A> then <?>
+Detach the screen: <CTRL>+<A> then <d>
+Reattach the screen: screen -r <socket>
+List available screen sessions: screen -ls
+Switch between nested screens: <CTRL>+<A>, then <p> or <n>
+Create a new screen: <CTRL>+<A>, then <c.
+Kill a screen session: <CTR>+<A>, then <K>

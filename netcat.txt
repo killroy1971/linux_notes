@@ -1,0 +1,41 @@
+NetCat - They TCP/IP Swiss Army Knife
+=====================================
+
+This useful utility isn't always available, but when it is, 
+here are a few useful command snippets.
+
+Check Port Status
+-----------------
+nc -v <target> <port>
+
+Attempt Connection
+------------------
+nc <target> <port>
+
+Listen to Traffic
+-----------------
+nc -w3 <target> <port>
+
+
+TCP Port Scan
+-------------
+nc -v -n -w1 <target_ip_address> <start_port>-<end_port>
+
+UDP Port Scan
+-------------
+nc -v -n -u <target_ip_address> <start_port>-<end_port>
+
+Common options
+--------------
+-v = Verbose
+-n = No DNS
+-u = UDP
+-l = listen
+-p <port> = Specify source port
+-w = Wait
+-o <filename> = Output to <filename>
+
+
+Note: To test an HTTP connection: openssl s_client -connect <server>:443
+
+

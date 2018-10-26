@@ -1,0 +1,7 @@
+DOS2Unix Command
+================
+
+sed -e "s///" <filename> > newfilename
+-OR-
+sed -i -e "s///" <filename> 
+

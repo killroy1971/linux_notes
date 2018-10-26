@@ -1,0 +1,95 @@
+=========
+Kickstart
+=========
+kservdiff: Show kickstart file, 6 to 7 changes
+
+====================
+Temp file monitoring
+====================
+systemd-tmpfiles
+
+* Configuration files: /usr/lib/tmpfiles.d/*.conf; /var/run/tmpfiles.d/*conf; /etc/tmpfiles.d/*conf
+
+* Temp file clean service configuration file contents:
+[timer]
+OnBootSec=15 min -- means "run 15 minutes after boot"
+OnUnitActivateSec=1d  -- means "run once per day"
+
+Systemd-tmpfiles won't remove a file unless the atime, ctime, and mtime parameters are all > age the age configuration set in the configuration file.
+
+=================
+Kernel components
+=================
+cgroups - limits, accounts, and isolates resource usage (CPU, RAM, I/O, Network, etc)
+autofs -
+kdbus
+
+==============================================================
+systemctl - Introspect and control systemd and service manager
+==============================================================
+systemctl [start, stop, kill, restart, reload, status, is-active, is-enabled, enable, disable ] <name>.<unit>
+- Note: The default <unit> type is "service."
+
+Systemd unit types
+----------------------
+- Target: group of units
+- Automount: filesystem auto-mountpoint
+- Device: kernel device name;
+- Mount: filesystem mountpoint
+- Path: file or directory
+- Scope: non-systemd process
+- Slice: unit of processes
+- Snapshot: systemd saved state
+- Socket: IPC socket
+- Swap: swap file
+- Timer: systemd timer
+
+systemctl functions
+-------------------
+systemctl daemon-reload -- reload systemd daemon
+systemctl kill -s HUP --kill -who=main <name>.service -- kill and reload a service's main process
+- Note: This also SIGHUPs every spawned <name>.service process; SIGKILL and SIGTERM slaughter them.
+  Stop does it properly
+systemctl list-dependencies (<name>.service) - Show service dependencies
+
+Systemd Analyze Boot Times
+---------------------------------
+systemd-analyze blame - print running units by init time
+systemd-analyze - to quickly show boot time
+systemd-analyze critical-chain - Show service start order
+systemd-analyze critical-chain <name>.service - Show sub component start order
+
+Permanently disable a service
+----------------------------------
+ln -s /dev/null /etc/systemd/system/<name>.service
+systemctl daemon-reload
+
+================
+Journal Analysis
+================
+journalctl <path>/<executable>
+journalctl -b -- All events since last boot
+journalctl --since=today
+journalctl -p err -- All events with a syslog priority of 'err'
+journalctl -f "Follow"
+journalctl -k -b -1 -- Show all kernel logs from previous boot
+journalctl -f -u <service> -- Show a live log from <service>
+
+
+Configure Journal Log Storage
+-----------------------------------
+mkdir /var/log/journal
+echo "SystemMaxUse=<size>" >> /etc/systemd/journald.conf
+systemctl restart systemd-journald
+
+Control Groups
+----------------
+systemd-cgls -- list control group hierarchy
+systemd-cgtop -- list control groups by CPU, memory, and I/O load
+
+notify
+analyze
+cgls
+cgtop
+loginctl
+nspawn

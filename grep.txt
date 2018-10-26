@@ -1,0 +1,8 @@
+Grep Items
+==========
+-i = ignore case
+-v = inverse
+-r = recursive
+-A<#> = # of lines after match
+-B<#> = # of lines before match
+-e logical -OR-  Precede each regex with an '-e'

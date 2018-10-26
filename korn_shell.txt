@@ -1,0 +1,28 @@
+Korn Shell
+==========
+
+Enable Command-line and History Editing
+---------------------------------------
+VISUAL=$(whence vi) -OR- set -o vi
+
+VI Editing Mode
+-------------------
+ESC     - Enter control mode
+DEL     - Delete previous character
+CTRL-W  - Erase previous word
+CTR-V   - "Quote" the next character
+#h / #l - Move left / right one or '#' character(s)
+#b / #w - Move left / right one or '#' word(s)
+0 / $   - Move to the beginning / end of the line
+i / a   - Insert / Append text at cursor
+I / A   - Insert / Append text at beginning / end of the line
+R       - Replace text
+D       - Delete to end of line
+#x      - Delete one or '#' character(s)
+dd      - Delete entire line
+?string - Search backward for string
+/string - Search forward for string
+n / N   - Repeat search forward / back
+j / k   - Move forward / backward one line in history
+#G      - Move to line '#' in history file
+

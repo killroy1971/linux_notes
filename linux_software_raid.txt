@@ -1,0 +1,53 @@
+Linux Software RAIDO: MDADM
+===========================
+
+Create an array
+---------------
+mdadm —create —verbose /dev/mdX —level=X <hard_drive1> <hard_drive2>
+* <mdX> is the RAID device you’ll use to create file systems. i.e. /dev/md1
+* —level=X is the RAID level: 0, 1, 5, 10
+* <hard_driveX> is the device path to the hard disk. i.e. /dev/sdb
+
+Set up /etc/mdadm.conf
+----------------------
+mdadm —detail —scan >> /etc/mdadm.conf
+
+Verify Array Status
+-------------------
+cat /proc/mdadm
+-OR-
+mdadm —detail /dev/mdX
+
+Remove Disk from An Existing Array
+----------------------------------
+1. Fail the disk: mdadm —fail /dev/mdX <hard_drive_to_remove>
+2. Remove the disk from the array: mdadm —remove <hard_drive_to_remove>
+-OR-
+mdadm /dev/mdX —fail <hard_drive_to_remove> —remove <hard_drive_to_remove>
+
+Add Disk to An Existing Array
+-----------------------------
+mdadm /dev/mdX <hard_drive_to_add>
+
+Monitor Array Sync Progress
+---------------------------
+watch cat /proc/mdstat
+
+Replace a Failed Drive
+----------------------
+1. Identify the drive: cat /proc/mdadm -OR- mdadm —detail /dev/mdX
+   * Any [U_] blocks from the ‘cat’ command will identify failed disks.  ‘(F)’ indicates which drive has failed.
+2. Fail the damaged disk: mdadm —manage /dev/mdX —fail <failed_hard_drive>
+3. Remove the damaged disk: mdadm —manage /dev/mdX —remove <failed_hard_drive>
+4. Check array status, proving the failed drives may be removed.
+5. Shutdown your system, then replace the failed drive(s).
+6. Duplicate settings from an existing, good array hard disk to the new hard disk: sfdisk -d /dev/<known_good_hd> | sfdisk /dev/<new_hard_disk>
+7. Verify disk partitioning: fdisk -l
+8. Add new disk to array: mdadm —manage /dev/mdX —add /dev/<new_hard_disk>
+9. Monitor array sync status: cat /proc/mdstat
+
+Delete an Array
+---------------
+1. Stop the array: mdadm —stop /dev/mdX
+2. Delete the array: mdadm —delete /dev/mdX
+

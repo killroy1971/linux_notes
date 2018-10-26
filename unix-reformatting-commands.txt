@@ -1,0 +1,17 @@
+Useful Unix Re-Formatting Commands
+wc - word count
+  -l: Count lines; -w: Count words; -m: Count characters
+tr - translate or delete characters
+-d: delete; -t: truncate SET1 to legnth of SET2
+SETs are defined by "\<something>"
+i.e. \n - newline; \b - backspace; \r - return; \t - tab
+
+sort - Sort
+-d: dictionary order; -f: ignore case; -n: numeric sort;
+-r: reverse
+
+head & tail - Limit output to beginning or end of file/output
+-#: Limit output to '#' lines.
+Tail has the "-f" parameter.  Lets you watch a file "grow" as new
+entries are added.
+

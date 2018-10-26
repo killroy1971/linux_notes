@@ -1,0 +1,59 @@
+TCPDUMP - Poor man's Wireshark
+==============================
+
+Listen to a single interface
+----------------------------
+tcpdump -i eth0
+
+Limit capture to <n> packets
+----------------------------
+tcpdump -c <n> -i eth0
+
+Limit capture to a specific port
+--------------------------------
+tcpdump -i eth0 port <port>
+
+Limit capture to a source ipaddr
+--------------------------------
+tcpdump -i eth0 src <ipaddr>
+
+Limit capture to a destination ipaddr
+-------------------------------------
+tcpdump -i eth0 dst <ipaddr>
+
+Print output in ASCII
+---------------------
+tcpdump -c <n> -A -i eth0
+
+Print output in ASCII and HEX
+-----------------------------
+tcpdump -XX -i eth0
+
+Display available interfaces
+----------------------------
+tcpdump -D
+
+Capture output to a pcap file
+-----------------------------
+tcpdump -i eth0 -w <filename>.pcat
+
+Read tcpdump pcap file
+----------------------
+tcpdump -r <filename>.pcap
+
+Capture only TCP packets
+------------------------
+tcpdump -i eth0 tcp
+
+Capture only UDP packets
+------------------------
+tcpdump -i etho udp
+
+Useful Options
+--------------
+This command can use logical 'and' and 'or'
+This command can also use 'not' to negate a condition
+-l = See captured packets on stdout during capture to a file
+-tttt = Print a human readable timestamp
+
+

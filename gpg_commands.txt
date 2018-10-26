@@ -1,0 +1,16 @@
+GNU Pretty Good Privacy
+=======================
+
+Generate a certificate
+----------------------
+gpg --output <path-to>/<file_name>.asc --gen-key
+
+Upload a certificate
+--------------------
+gpg --keyserver <server> --send-keys <userid>
+
+Generate a revocation certificate
+---------------------------------
+gpg --output <path-to>/myrevoke.asc --gen-revoke <userid>
+
+

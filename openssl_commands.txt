@@ -1,0 +1,92 @@
+Useful OpenSSL Commands
+=======================
+
+Generate a Certificate Signing Requst
+-------------------------------------
+openssl req -new -newkey rsa:4096 -keyout <hostname>_key.pem -nodes -out <hostname>_csr.pem
+  - <hostname>_key.pem: RSA Private Key file
+  - <hostname>_csr.pem: CSR Key file for SSL certificate provider
+
+View a Certificate Signing Reqeust File's Contents
+--------------------------------------------------
+openssl req -text -noout -in <hostname>_csr.pem
+
+View an x509 Certificate's Contents
+-----------------------------------
+openssl x509 -text -noout -in <hostcert>.pem
+
+View a certifiate's Signing Authority
+-------------------------------------
+openssl x509 -in <certificate>.pem -noout -issuer -issuer_hash
+
+Test a certificate against a private key
+----------------------------------------
+openssl x509 -in cert.pem -noout -modulus && openssl rsa -in key.pem -noout -modulus
+
+The output modului should be the same
+
+Determine a certificate's hash value
+------------------------------------
+openssl x509 -noout -hash -in cert.pem
+
+RSA Keys
+========
+
+Generate RSA Keys
+-----------------
+openssl genrsa -out private.pem 1024
+
+Extract RSA Public Key
+----------------------
+openssl rsa -in private.pem -out public.pem -outform PEM -pubout
+
+Remove RSA Pass Phrase
+----------------------
+openssl rsa -in key.pem -out keyout.pem
+
+Print out RSA Private Key on stdout
+-----------------------------------
+openssl rsa -in key.pem -text -noout
+
+Convert Key File Formats
+========================
+
+Convert PEM to PKCS12
+---------------------
+openssl pkcs12 -export -in cert.pem -inkey key.pem -out cred.p12
+  - cert.pem: PEM certificate file
+  - key.pem: The certifiate's private key file
+
+Export PKCS12 Certificate
+------------------------
+openssl pkcs12 -in cred.p12 -out cert.pem -nodes -clcerts <-nokeys> <-nocerts>
+ * cered.p12: PKCS12 file
+ * certkey.pem: SSL certificate PEM file
+ * -nodes: do not encrypt the private key
+ * -nokeys: Output the certificate
+ * -nocerts: Output the private keys
+
+Export PKC12 Private Key
+------------------------
+openssl pkcs12 -in cred.p12 -out cert.key -nocerts -nodes
+
+Export PKC12 CA Chain
+---------------------
+openssl pkcs12 -in cred.p12 -cacerts -nokeys > cacert.pem
+
+View PKCS12 Contents
+--------------------
+openssl pkcs12 -info -nodes -in cred.p12
+
+Convert DER to PEM
+------------------
+openssl x509 -inform der -in certificate.cer -out certificate.pem
+
+Convert PEM to DER
+------------------
+openssl x509 -outform der -in certificate.pem -out certificate.der
+
+Convert P7B to PEM
+------------------
+openssl pkcs7 -print_certs -in certificate.p7b -out certificate.cer
+

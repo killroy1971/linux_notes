@@ -1,0 +1,28 @@
+XTerm Configuration
+===================
+Configuring your X environment
+------------------------------
+Unix systems use a windowing sytem known as X-Windows.  It doesn't matter if
+you see a window manager like KDE, GNOME, CDE, etc.  X-Windows is at its base.
+So how is this useful?  With a few "dotfiles" in your home directory you can
+create a predictable computing environment across several differnet networks.
+Let's start with the "console" window or "terminal emulator."  Usually this 
+is xterm or ddterm.  Find out which with the command: "Echo $TERM" and 
+record the finding.
+
+.Xdefaults
+----------
+#Xdefaults file.  For each terminal type: xterm, ddterm, vt100, etc. 
+#create an entry beginning with the terminal's executable name as
+#shown below for 'xterm.'
+#Xterm
+xterm*foreground: green
+xterm*background: black
+# Note: gemoetry is collumnsxrows
+xterm*geometry: 80x50
+#ddterm
+ddterm*foreground: green
+ddterm*background: black
+ddterm*geometry: 80x50
+
+You'll have to re-login before these changes take effect.

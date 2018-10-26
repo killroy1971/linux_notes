@@ -1,0 +1,14 @@
+How to set up an SSH SOCKS proxy to connect to a limited access network
+Purpose: Provide access to ports on a limited access network from your
+primary workspace.
+
+Step 1: Setup SOCKS5 SSH tunnel
+ssh -D 1337 -q -C -N <user>@<target>
+- Note: The "-D" option stands for "Dynamic" port forwarding.  Your programs
+must support SOCKS configuraiton for this to work.
+
+Step 2: Configure your programs (i.e. web browser) to use SOCKS.
+You will need a proxy add-on, or use the web browser's "Conenction" or "Proxy" options.
+1. Set the configuration to "Manual."
+2. Enter "localhost" as the Host, and 1337 as the port.
+

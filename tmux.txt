@@ -1,0 +1,21 @@
+Start tmux with a session name: tmux new -s <name>
+
+Attatch to an un-named  session: tmux a -t <#> 
+Attach to a <named> session: tmuc a -t <name>
+Detach: <CTRL>-b then d
+
+List sessions: tmux ls
+
+Kill session: tmux kill-session -t <name>
+
+New Window: <CTRL>-b then c
+  - Move between windows: <CTRL>-b then
+    p - Previous Windows
+    n - Next Window
+    0-9 - Move to window number #
+Panes:
+  Split pane horizontally: <CTRL>-b then "
+  Split pane vertically: <CTRL>-b then %
+  Move between panes: <CTRL>-b then <arrow-key>
+  Move current pane shell to another:
+  <CTRL>-b, then { or }

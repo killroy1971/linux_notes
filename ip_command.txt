@@ -1,0 +1,26 @@
+RHEL 7 IP Command
+=================
+
+Display Status
+--------------
+ip con show <interface> - Show available interfaces
+ip link show <interface> - Show link status
+ip addr show <interface> - Show assigned ip addresses
+ip route show <interface> - Show route table
+
+Configure interface
+-------------------
+ip addr add <ipaddr>/<mask> dev <interface>
+ip addr del <ipaddr>/<mask> dev <interface>
+
+Set interface status
+--------------------
+ip link set <interface> up
+ip link set <interface> down
+
+Routes
+-------
+ip route show 
+ip route get <ipaddr>
+ip route add default via <ipaddr>
+

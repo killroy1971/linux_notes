@@ -1,0 +1,31 @@
+===============
+Network Manager
+===============
+
+Display Status
+--------------
+nmcli con show <con-name>
+nmcli dev show <device>
+
+Configure Device
+----------------
+nmcli con add con-name <con-name> ifname <device> \
+  type ethernet ip4 <ipaddr>/<mask> gw4 <ipaddr>
+
+Remove Device Configuration
+---------------------------
+nmcli con del <con-name>
+
+Modify Device Configuration
+---------------------------
+nmcli con mod <con-name> <options>
+i.e. Set mode to manual and assign an ip address and gateway
+nmcli con mod eth0 ipv4.addresses 192.168.1.10/24
+nmcli con mod eth0 ipv4.gateway 192.168.1.1
+nmcli con mod eth0 ipv4.method manual
+nmcli con up eth0
+
+Command Line Editor
+-------------------
+nmcli con edit <device>
+

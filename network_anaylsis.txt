@@ -1,0 +1,29 @@
+# Linux Network Analysis
+
+## Common network issue causes
+- Incorrect DNS addresses
+- Incorrect netmask
+- Incorrect MTU
+- Duplicate IP address
+
+## Incorrect DNS addresses
+  - Examine the nameserver addresses in /etc/resolv.conf
+    Attempt to perform a nslookup or dig using each address as the server address
+    nslookup <ip-address> <item-to-query>
+    dig +short <nameserver-ip-address> <item-to-query>
+    dig -x +short <nameserver-ip-address> <reverse-dns-item-to-query>
+  If you can't perform non-fqdn dns queries on local subnet items:
+  - Examine /etc/resolv.conf and look for a "serach" line.  It will contain DNS zones to search first.
+    Add or edit this line if it is incorrect.
+    
+## Incorrect netmask
+ping -M do -n 1460 <target-ip-addr>
+- Increase -n by 10 till you see: "ping: sendto: Message too long"
+- Decrease -n by 2 untill packets aren't fragmented
+
+## Dupcliate IP address
+  - Log into the questionable system via a console.
+  - Log into a second system via a console.
+  - On the questionalble system, shut down the network interface hosting the questioned ip address.
+  - On the second system, try to ping the questioned ip address.
+

@@ -1,0 +1,34 @@
+How to configure a Linux server for VLAN tagging
+
+First, you must have your VLAN created on your switch/router.
+
+Change the following sysctl settings:
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.default.rp_filter = 0
+
+Create a /etc/sysctl.d/99-default.conf or similar file that will be loaded by sysctl at boot.
+
+Now, crate your vlan configuration, using nmcli, nmtui, or by editing the ifcfg files.  For exmaple:
+ifcfg-enp1s0:
+NAME=enp1s0
+DEVICE=enp1s0
+ONBOOT=yes
+TYPE=Ethernet
+BOOTPROTO=none
+NM_CONTROLLED=yes
+
+ifcfg-laboratory:
+NAME=laboratory
+DEVICE=laboratory
+ONBOOT=yes
+TYPE=vlan
+BOOTPROTO=none
+VLAN=yes
+PHYSDEV=enp1s0
+VLAN_ID=10
+IPADDR=10.10.10.2
+PREFIX=32
+GATEWAY=10.10.10.1
+
+Now reload your network configuration, or down/up the interfaces.
+

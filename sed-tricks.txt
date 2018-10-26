@@ -1,0 +1,16 @@
+Add line after match:
+sed -i '/<ITEM-to-MATCH>a <ITEM-to-ADD>' <file>
+
+Add line before match:
+sed -i '/<pattern>/i <new-line>' <file>
+
+Remove blank lines:
+sed -i '/^$/d' <file>
+
+Remove lines from a (|) pipe
+<some command> | sed - e '/<regex>/d'
+
+Disable yum repositories in a .repo file
+sed -i -e 's/enabled.^=.^1/enabled=0/g' <repofile.repo>
+
+

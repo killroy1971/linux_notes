@@ -1,0 +1,51 @@
+Grub2
+=====
+
+Set up chroot environment
+-------------------------
+If you use LVM, set it up
+-------------------------
+apt-gst install lvm2 # If not already installed
+modprobe dm-mod
+vgchange -a y
+
+Discover the available lvm paths
+--------------------------------
+lmv pvscan -- list physical volumes used by lvm
+lvm vgscan -- list volume groups
+lvm lvdisplay -- list available logical volumes
+
+Mount necessary locical volumes
+-------------------------------
+- Note the necessary logical volumes i.e. the path to root "/"
+mount /dev/<volume_group>/<logical_volume> /mnt/boot
+
+Mount the volumes necessary for chroot
+--------------------------------------
+mount <path-to-root> /mnt
+mount <path-to-/boot> /mnt/boot # If you have a separate /boot partition
+mount -t proc none /mnt/proc
+mount -t sysfs sys /mnt/sys
+mount -o bind /dev /mnt/dev
+
+Launch chroot
+-------------
+chroot /mnt /bin/bash
+source /etc/profile
+export PS1="(chroot) $PS1"
+
+Set up 'mtab'
+-------------
+- If you don't have a separate /boot partition:
+  grep -v rootfs /proc/mounts > /etc/mtab
+- If you have a seaparate /boot partition:
+  cp /proc/mounts /etc/mtab
+
+Install grub
+------------
+grub-install /dev/<boot_device>
+
+Create grub.cfg
+---------------
+grub-mkconfig -o /boot/grub/grub.cfg
+

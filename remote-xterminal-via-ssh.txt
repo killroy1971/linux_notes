@@ -1,0 +1,4 @@
+# Syntax:
+ssh -X username@192.168.1.103 <<command>>/usr/bin/mythtv-setup
+# Example:
+ssh -X username@192.168.1.103 /usr/bin/mythtv-setup

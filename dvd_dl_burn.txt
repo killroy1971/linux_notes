@@ -1,0 +1,6 @@
+Burn DVD Images
+===============
+growisofs -use-the-force-luke=notray -use-the-force-luke=4gms -dvd-compat -speed=4 -use-the-force-luke=tracksize:4062900 -use-the-force-luke=tty -Z /dev/sr1 /proc/self/fd/0
+
+genisoimage -input-charset utf8 -r -J -iso-level 3 -allow-limited-size -udf -graft-points -path-list /tmp/brasero_tmp_HEIN4Y -exclude-list /tmp/brasero_tmp_PHIN4Y -V Data disc (10 Aug 17) -A Brasero-3.12.1 -sysid LINUX
+

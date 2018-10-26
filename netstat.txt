@@ -1,0 +1,15 @@
+NETSTAT - Show network status
+Useful switches:
+netstat -i=<interface> # Show a specific interface (or just -i for all interfaces)
+netstat -r                   # Show kernel routing tables
+netstat -s                   # Show stats for each protocol
+netstat -c                   # Display continuous information, updated each second
+netstat -l                   # Show listening sockets
+netstat -p                   # Show process ID and which program owns the socket
+netstat -t or -u             # Limit to -t "tcp" or -u "udp" sockets
+netstat -C                   # Print the route cache's routing information
+
+Examples:
+netstat -ln   # Generate a list of listening ports
+
+
