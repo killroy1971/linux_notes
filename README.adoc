@@ -1,0 +1,13 @@
+= Glenn H. Snead's Linux OS Notes
+
+This is a collection of my Linux notes that don't fit into another category.
+
+== TOTO
+Convert everything to adoc, and build a Table of Contents for online viewing.
+
+== LICENSE
+MIT
+
+== AUTHORS
+Glenn H. Snead (glennsnead@gmail.com)
+
