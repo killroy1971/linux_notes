@@ -1,4 +1,0 @@
-Email to Evernote
-=================
-Using your Evernote provided "email to" email address, add this to your Subject line:
-@<notebook_name> #<tag1> #<tag2> #<tag3>

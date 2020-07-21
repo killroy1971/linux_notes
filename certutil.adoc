@@ -1,0 +1,84 @@
+= Using the certuitl command
+
+. Create a certificate database
+
++
+[source, shell]
+----
+certutil -N -d <database path>
+----
++
+
+. Create a certificate request
+
++
+[source, shell]
+----
+certutil -R -d <database path> -a -g <key size> -s 'CN=gsnead,O=GSHOME.LAN'
+----
++
+
+. List certificates
+
++
+[source, shell]
+----
+certutil -L -d sql:/home/my/sharednssdb -n <certificate_name> -a
+----
++
+
+NOTE: -a: Print in ASCII format
+
+. List keys
+
++
+[source, shell]
+----
+certutil -K -d sql:$HOME/nssdb
+----
++
+
+. Add certficate to the database
+
++
+[source, shell]
+----
+certutil -A -n "CN=My SSL Certificate" -t ",," -d sql:/home/my/sharednssdb -i /home/example-certs/cert.cer
+----
++
+
+. Delete certificate from the database
+
++
+[source, shell]
+----
+certutil -A -n "CN=My SSL Certificate" -t ",," -d sql:/home/my/sharednssdb -i /home/example-certs/cert.cer
+----
++
+
+. Validate certificate
+
++
+[source, shell]
+----
+certutil -A -n "CN=My SSL Certificate" -t ",," -d sql:/home/my/sharednssdb -i /home/example-certs/cert.cer
+----
++
+
+. Print certificate chain
+
++
+[source, shell]
+----
+certutil -d sql:/home/my/sharednssdb -O -n "jsmith@example.com"
+----
++
+
+. Output certificate
+
++
+[source, shell]
+----
+pk12util -o certs.p12 -n Server-Cert -d sql:/home/my/sharednssdb
+----
++

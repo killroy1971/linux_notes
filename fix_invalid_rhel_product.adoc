@@ -1,0 +1,110 @@
+= Remove invalid Red Hat Product ID
+
+. List installed/consumed products
+
++
+[source, shell]
+----
+subscription-manager list
+----
++
+
+Example output
+
++
+[source, text]
+----
++-------------------------------------------+
+    Installed Product Status
++-------------------------------------------+
+Product Name:   Red Hat Developer Toolset (for RHEL Server)
+Product ID:     176
+Version:        2.1
+Arch:           x86_64
+Status:         Not Subscribed
+Status Details: Not supported by a valid subscription.
+Starts:
+Ends:
+
+Product Name:   Red Hat Enterprise Linux Server
+Product ID:     69
+Version:        6.9
+Arch:           x86_64
+Status:         Subscribed
+Status Details:
+Starts:         06/27/2017
+Ends:           06/27/2018
+----
++
+
+. List the product pem files
+
++
+[source, shell]
+----
+ls -ltr
+----
++
+
+Example Output
++
+[source, shell]
+----
+-rw-r--r--. 1 root root 2167 Oct 31  2016 176.pem
+-rw-r--r--. 1 root root 2159 Mar 21  2017 69.pem
+----
++
+
+. Remove invalid product pem file
++
+[source, shell]
+----
+rm 176.pem
+----
++
+
+. Validate installed/consumed products
+
++
+[source, shell]
+----
+subscription-manager list
+----
++
+
++
+[source, text]
+----
++-------------------------------------------+
+    Installed Product Status
++-------------------------------------------+
+Product Name:   Red Hat Enterprise Linux Server
+Product ID:     69
+Version:        6.9
+Arch:           x86_64
+Status:         Subscribed
+Status Details:
+Starts:         06/27/2017
+Ends:           06/27/2018
+----
+
+
+. Validate registration status
+
++
+[source, shell]
+----
+subscription-manager status
+----
++
+
++
+[source, text]
+----
++-------------------------------------------+
+   System Status Details
++-------------------------------------------+
+Overall Status: Current
+
+----
++

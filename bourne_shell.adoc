@@ -1,40 +1,65 @@
-Bourne Shell
-============
+= Bourne Shell Notes
 
-Variables
-----------
+== Variables
+
 IFS - This variable lists the characters that the shell considers to be whitespace characters.
+
 PATH - This variable is interpreted as a list of directories (separated by colons on a Unix system). Whenever you type the name of an executable for the shell to execute but do not include the full path of that executable, the shell will look in all of these directories in order to find the executable.
+
 PS1 - This variable lists a set of codes. These codes instruct your shell about what the command-line prompt in the interactive shell should look like.
+
 PWD - The value of this variable is always the path of the working directory.
 
-The 'set' command
------------------
+
+== The 'set' command
+
 The 'set' command allows you to set or disable a number of options that are part of the CEE and influence the behavior of the shell. To set an option, set is called with a command line argument of '-' followed by one or more flags. To disable the option, set is called with '+' and then the same flag.
 +/-a -> When set, automatically mark all newly created or redefined variables for export.
 
-Prompt Example
---------------
-PS1="`whoami` `hostname -s` \n \b`pwd` \$ "
-Positional Varriables: $0 $1 $2 $3 etc.  -> Command line arguments passed to a script.
+== Command Prompt Example
 
-If/then/else format
--------------------
+PS1="`whoami` `hostname -s` \n \b`pwd` \$ "
+
+NOTE: Positional Varriables: $0 $1 $2 $3 etc.  -> Command line arguments passed to a script.
+
+== If/then/else format
+
+[source, shell]
+----
 if [ <texst> ]; then
  <commands>
 else
  <commands>
 fi
+----
 
-Echo Command Functions 
-----------------------
-\n - newline; \e - escape; \\ - backspace; 
+== Echo Command Functions
 
-Test (works as part of the 'if' test) switches
-----------------------------------------------
+\n - newline; \e - escape; \\ - backspace;
+
+NOTE: Test (works as part of the 'if' test) switches
+
 -e Test if file exist; -d test if file is a directory; -z string1 Is string1 zero legnth?
--n string1 Is string1 non-zero?; 
+-n string1 Is string1 non-zero?;
 
-Case statement format
----------------------
+== Case statement format
+
+[source, shell]
+----
 case <varriable> in
+<case1>)
+  command1
+  command2
+;;
+esac
+----
+
+== For loop
+
+[source, shell]
+----
+for i in `<command that generates a list>`; do
+command1
+command2
+done
+----

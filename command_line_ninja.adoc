@@ -1,0 +1,52 @@
+= Command Line Ninja
+
+. Editing the command line
++
+[source, text]
+----
+- CTRL-<Left> and CTRL-<Right>: Jump between arguments
+- Home and End: Move to start or end of line
+- CTRL-U: Clear entire line
+- CTRL-K: Delete from cursor position to EOL
+- CTRL-W: Delete word before cursor
+- CTRL-R: Search history
+----
++
+
+. History
++
+[source, shell]
+----
+!<command>:p -- View last <command>
+----
++
+
+. Fix Spelling
++
+[source, shell]
+----
+^<misspelling>^<corrected_spelling>: Re-run last command with fixed spelling
+----
++
+
+. File Manipulation
+- Change file extension:
++
+[source, shell]
+----
+mv <file>.{<old>,<new>}
+----
++
+- Append file extension:
++
+[source, shell]
+----
+mv <file>.{,<extension}
+----
++
+
+NOTE: Sequence: {1,2,3} or {a,b,c}
+
+. Directory
+- cd !$ -- Enter directory you just created: "!$" is the last set of arguments
+- Move to last working directory: cd -

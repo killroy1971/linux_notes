@@ -1,0 +1,18 @@
+= Find a blcok device's UUID
+
+- Using ls
++
+[source, shell]
+----
+ls -l /dev/disk/by-uuid
+----
++
+
+
+- Using blkid
++
+[source, shell]
+----
+blkid <device>
+----
++

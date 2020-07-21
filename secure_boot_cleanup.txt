@@ -1,0 +1,5 @@
+Secure Boot Cleanup
+===================
+
+List Secure Boot images: efibootmgr -v
+Delete entry: efibootmgr -b <boot_number> -B

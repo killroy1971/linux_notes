@@ -1,21 +1,75 @@
-Start tmux with a session name: tmux new -s <name>
+Tmux - Terminal Multiplexer
+===========================
 
-Attatch to an un-named  session: tmux a -t <#> 
-Attach to a <named> session: tmuc a -t <name>
-Detach: <CTRL>-b then d
+* Start tmux with a session name: tmux new -s <name>
 
-List sessions: tmux ls
+* Attatch to an un-named  session: tmux a -t <#> 
+* Attach to a <named> session: tmuc a -t <name>
+* Detach: <CTRL>-b then d
 
-Kill session: tmux kill-session -t <name>
+* List sessions: tmux ls
 
-New Window: <CTRL>-b then c
-  - Move between windows: <CTRL>-b then
-    p - Previous Windows
-    n - Next Window
-    0-9 - Move to window number #
-Panes:
-  Split pane horizontally: <CTRL>-b then "
-  Split pane vertically: <CTRL>-b then %
-  Move between panes: <CTRL>-b then <arrow-key>
-  Move current pane shell to another:
-  <CTRL>-b, then { or }
+* Kill session: tmux kill-session -t <name>
+
+* New Window: <CTRL>-b then c
+   - Move between windows: <CTRL>-b then
+     p - Previous Windows
+     n - Next Window
+     0-9 - Move to window number #
+
+* Panes:
+   Split pane horizontally: <CTRL>-b then "
+    Split pane vertically: <CTRL>-b then %
+   Move between panes: <CTRL>-b then <arrow-key>
+   Move current pane shell to another:
+   <CTRL>-b, then { or }
+
+tmux.conf
+---------
+# Make mouse useful in copy mode
+if-shell "uname | grep -q GNU/Linux" "setw -g mode-mouse on"
+
+# Allow mouse to select which pane to use
+if-shell "uname | grep -q GNU/Linux" "set -g mouse-select-pane on"
+
+# Allow mouse dragging to resize panes
+if-shell "uname | grep -q GNU/Linux" "set -g mouse-resize-pane on"
+
+# Allow mouse to select windows
+if-shell "uname | grep -q GNU/Linux" "set -g mouse-select-window on"
+
+if-shell "uname | grep -q Darwin" "set-option -g mouse on"
+
+# Allow xterm titles in terminal window, terminal scrolling with scrollbar, and setting overrides of C-Up, C-Down, C-Left, C-Right
+# (commented out because it disables cursor navigation in vim)
+if-shell "uname | grep -q GNU/Linux" 'set -g terminal-overrides "xterm*:XT:smcup@:rmcup@:kUP5=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC"'
+
+# Scroll History
+set -g history-limit 30000
+
+# Set ability to capture on start and restore on exit window data when running an application
+setw -g alternate-screen on
+
+# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
+set -s escape-time 50
+
+# Enable color support
+set -g automatic-rename
+
+# Move around in windows
+bind-key -n M-Up select-pane -U
+bind-key -n M-Left select-pane -L
+bind-key -n M-Down select-pane -D
+bind-key -n M-Right select-pane -R
+
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Easier window splitting
+unbind '"'
+bind | split-window -h
+unbind %
+bind - split-window -v
+

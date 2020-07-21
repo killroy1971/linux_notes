@@ -1,0 +1,18 @@
+= DOS2Unix Command
+
+. Create a new file from the DOS text file
++
+[source, shell]
+----
+sed -e "s///" <filename> > <newfilename>
+----
++
+
+. Change the existing file
+
++
+[source, shell]
+----
+sed -i -e "s///" <filename>
+----
++

@@ -1,0 +1,71 @@
+= Bind Notes
+
+== Ubuntu configuration notes
+
+. Generating the rndc "secret" key:
+
++
+[source, shell]
+----
+rndc-confgen
+----
++
+
+NOTE: If rndc-confgen "hangs" use the "-r /dev/urandom" option.
+
+
+. Fix dhcp's permissions on the rndc.key file
+- Add these lines to /etc/apparmor.d/user/sbin/dhcpd or usr.sbin.dhcpd3 file
+
++
+[source, shell]
+----
+  /etc/bind/r,
+  /etc/bind/**r,
+.. Change the file permissions
+chmod 644 /etc/bind/rndc.key
+----
++
+
+. Grant bind access to the rndc.key file
+- Add these lines to /etc/apparmor.d/usr/sbin.named file
+
++
+[source, shell]
+----
+  /etc/bind rw,
+  /etc/bind/ **rw,
+----
++
+
+- Now give the "bind" group write permissions to /etc/bind (if you are saving the zone files to this directory).
+
++
+[source, shell]
+----
+chgrp bind /etc/bind && chmod 0775 /etc/bind
+----
++
+
+. Set "bind" to a particular interface: Edit /etc/default/dhcp3-server file.
+- Look for this line: INTERFACES=""
+- Put the named interface i.e. eth0 or br0 between the quotation marks.
+
+== CentOS/RHEL configuration notes
+. Enable SELinux master zone writes
+
++
+[source, shell]
+----
+setsebool -P named_write_master_zones on
+----
++
+
+.  Set the SeLinux label in /var/named
+
++
+[source, shell]
+----
+restorecon -v /var/named/*
+----
++

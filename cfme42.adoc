@@ -1,0 +1,14 @@
+= CloudForms 4.2 Container Scanning (Disconnected)
+
+. Edit /var/www/miq/vmdb/app/models/manageiq/providers/kubernetes/container_manager/scanning/job.rb
+. Go to line 374: "--serve=0.0.0.0:#{options[:pod_port]}"
+. Add a comma to the end of this line, then create this line:
+
++
+[source, shell]
+----
+"--cve-url=http://<server_ip_or_fqdn>/<path>/"
+----
++
+
+. Restart cloud forms service: systemctl restart evmserverd.service

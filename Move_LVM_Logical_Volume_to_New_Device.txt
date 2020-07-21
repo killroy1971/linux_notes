@@ -1,0 +1,30 @@
+#HOWTO Move an LVM logical volume to a new physical volume
+
+## Add the new block device to the volume group
+1. Find the new block device: fdisk -l | grep dev
+2. List existing volume group devices: vgs +o devices | grep <vg_name>
+3. Create new physical volume: pvcreate <new_block_device>
+4. Add new physical volume to target volume group: vgextend <vg_name> <pv_name>
+5. Verify volume group configuratin: vgdisplay <vg_name> -v
+6. Check multipath devices:
+  - lvs -o+devices
+  - dmsetup deps /dev/<vg>/<lv_to_move>
+
+##  Mirror the logical volume to the new physical volume
+1. lvconvert -m 1 /dev/<vg>/<lv_to_move> /dev/<pv_name>
+2. Montior the mirroring progress: lvs /dev/<vg>/<lv_name> -a -o name,copy_percent,devices
+3. Once complete, verify the mirror: vs -o+devices
+
+## Finish logical volume migration
+1. Remove old physical volume from the mirror: lvconvert -m 0 /dev/<vg>/<lv_name> /dev/<old_pv>
+2. Check volume group devices:
+  - lvs -o+devices
+  - dmsetup deps /dev/<vg>/<lv_name>
+3. Remove old physical volume from the volume group: vgreduce /dev/<vg> /dev/<old_pv_name>
+4. Check logical volume's configuration: lvs -o+devices
+5. Remove old physical volume: pvremove /dev/<old_pv_name>
+
+
+
+
+

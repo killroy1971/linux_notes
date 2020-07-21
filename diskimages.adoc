@@ -1,0 +1,55 @@
+= Diskimages
+
+. Create a blank disk image
+
++
+[source, shell]
+----
+dd if=/dev/zero of=<imagename.img> bs=512 count=<# blocks>
+----
++
+
+NOTE: Where <# blocks> = <Size in MB> * 2 * 1000
+
+. Format blank diskette image
+
++
+[source, shell]
+----
+losetup /dev/loop0 <imagename.img>
+----
++
+
+Now format to whatever filesystem you want, using /dev/loop0 for the device
+
+. (Un)mount blank diskette image
+
++
+[source, shell]
+----
+mount -t <filesytem type> /dev/loop0 </mount path>
+umount </mount path>
+----
++
+
+. Create a disk image from an existing drive
+
++
+[source, shell]
+----
+dd if=/dev/<drive> of=<imagename.img>
+----
++
+
+NOTE: You can speed this up if you calculate the number of blocks to copy
+
+. Find an unknown block size
+
++
+[source, shell]
+----
+dd if=/dev/<drive> ibs=128 of=<imagename.img> obs=1 count=1
+----
++
+
+WARNING: Will produce an error message with the actual block size, unless the block size is the default - 512

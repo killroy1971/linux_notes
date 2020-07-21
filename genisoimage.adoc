@@ -1,0 +1,17 @@
+= Generate an ISO Image
+
+- Using genisoimage
++
+[source, shell]
+----
+genisoimage -o <output_file>.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot  -V 'LABEL from isolinux.cfg' -boot-load-size 4 -boot-info-table -e images/efiboot.img -R -J -V -T <source_dir>/
+----
++
+
+- Using mkisofs
++
+[source, shell]
+----
+mkisofs -r -R -J -T -v -no-emul-boot -boot-load-size 4 -boot-info-table -V "LABEL from isolinux.cfg" -b isolinux/isolinux.bin -c isolinux/boot.cat -x "lost+found" --joliet-long -o <output_file>.iso .
+----
++
